@@ -26,3 +26,4 @@ MySQL Wokbench
 * Universidade_V1.mwb - versão inicial
 * Universidade_V2.mwb - versão com refinamentos do esquema
 * Universidade_V3.mwb - versão final com alterações visuais
+* Diagrama_Universidade.png - Imagem do diagrama
