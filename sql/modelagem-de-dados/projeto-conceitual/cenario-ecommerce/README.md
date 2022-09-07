@@ -22,7 +22,7 @@ Criar esquema conceitual para o contexto de e-commerce com base na narrativa for
 ### Refinando:
 * Cliente PJ e PF – Uma conta podeser PJ ou PF, mas não pode ter as duas informações 
 * Pagamento– Pode ter cadastradomais de uma forma de pagamento
-* Entrega – Possuistatus e código de rastreio 
+* Entrega – Possui status e código de rastreio 
  
 
 ### Desenvolvimento:
@@ -30,4 +30,5 @@ MySQL Wokbench
 
 ### Arquivos:
 * Ecommerce_V1.mwb - versão inicial
-* Ecommerce_V2.mwb - versão final com refinamentos do esquema 
+* Ecommerce_V2.mwb - versão final com refinamentos do esquema
+* Diagrama_Ecommerce.png - Imagem do diagrama 
