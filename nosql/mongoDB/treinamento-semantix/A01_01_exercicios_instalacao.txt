@@ -1,0 +1,53 @@
+
+Exercícios - Instalação docker e docker-compose
+
+-----------------------------------------------------------------
+1. Instalação do docker e docker-compose
+-----------------------------------------------------------------
+
+Acesso: https://docs.docker.com/get-docker/
+
+-----------------------------------------------------------------
+2. Baixar as imagens do mongo e mongo-express
+-----------------------------------------------------------------
+
+docker pull mongo
+docker pull mongo-express
+
+-----------------------------------------------------------------
+3. Iniciar o MongoDB através do docker-compose
+-----------------------------------------------------------------
+
+docker-compose up -d --> utilizado no primeiro acesso
+                         ele irá processar o conteúdo do arquivo 
+                         de composição e configurar os volumes, 
+                         redes e containers especificados. 
+docker-compose start --> iniciar os containers
+docker-compose stop  --> parar os serviços
+docker-compose down  --> "matar" os serviços
+
+-----------------------------------------------------------------
+4. Listar as imagens em execução
+-----------------------------------------------------------------
+
+C:\aline\treinamentos\mongo>docker ps
+CONTAINER ID   IMAGE           COMMAND                  CREATED       STATUS       PORTS                                           NAMES
+5fa5697dd745   mongo-express   "tini -- /docker-ent…"   3 hours ago   Up 2 hours   0.0.0.0:8081->8081/tcp, :::8081->8081/tcp       mongo-express
+aca20f57e0d9   mongo           "docker-entrypoint.s…"   3 hours ago   Up 2 hours   0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   mongo
+
+-----------------------------------------------------------------
+5. Listar os bancos de dados do MongoDB
+-----------------------------------------------------------------
+
+C:\aline\treinamentos\mongo>docker exec -it mongo bash
+root@aca20f57e0d9:/# mongo
+
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+-----------------------------------------------------------------
+6. Visualizar através do Mongo Express os bancos de dados
+Acesso: http://localhost:8081/
+-----------------------------------------------------------------
