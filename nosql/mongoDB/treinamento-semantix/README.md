@@ -1,4 +1,4 @@
-<img src="https://media.badgr.com/uploads/badges/5255bd41-1608-4c10-829b-59007f6f268e.png" width="200">
+<img src="https://media.badgr.com/uploads/badges/5255bd41-1608-4c10-829b-59007f6f268e.png" width="220" align=right>
 
 # Treinamento Big Data Engineer - Semantix
 
