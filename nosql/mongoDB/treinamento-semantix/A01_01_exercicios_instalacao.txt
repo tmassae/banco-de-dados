@@ -30,22 +30,22 @@ docker-compose down  --> "matar" os serviços
 4. Listar as imagens em execução
 -----------------------------------------------------------------
 
-C:\aline\treinamentos\mongo>docker ps
-CONTAINER ID   IMAGE           COMMAND                  CREATED       STATUS       PORTS                                           NAMES
-5fa5697dd745   mongo-express   "tini -- /docker-ent…"   3 hours ago   Up 2 hours   0.0.0.0:8081->8081/tcp, :::8081->8081/tcp       mongo-express
-aca20f57e0d9   mongo           "docker-entrypoint.s…"   3 hours ago   Up 2 hours   0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   mongo
+PS C:\Users\tmass\onedrive\documents\github\banco-de-dados\nosql\mongodb> docker ps
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                      NAMES
+b6f5440caf67   mongo           "docker-entrypoint.s…"   33 minutes ago   Up 33 minutes   0.0.0.0:27017->27017/tcp   mongo
+27528f91fb85   mongo-express   "tini -- /docker-ent…"   33 minutes ago   Up 33 minutes   0.0.0.0:8081->8081/tcp     mongo-express
 
 -----------------------------------------------------------------
 5. Listar os bancos de dados do MongoDB
 -----------------------------------------------------------------
 
-C:\aline\treinamentos\mongo>docker exec -it mongo bash
-root@aca20f57e0d9:/# mongo
+PS C:\Users\tmass\onedrive\documents\github\banco-de-dados\nosql\mongodb> docker exec -it mongo bash
+root@0b6dcecbb414:/# mongosh
 
-> show dbs
-admin   0.000GB
-config  0.000GB
-local   0.000GB
+test> show dbs
+admin   40.00 KiB
+config  92.00 KiB
+local   72.00 KiB
 
 -----------------------------------------------------------------
 6. Visualizar através do Mongo Express os bancos de dados

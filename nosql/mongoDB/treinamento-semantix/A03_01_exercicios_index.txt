@@ -1,0 +1,262 @@
+-----------------------------------------------------------------
+Exercícios - Index
+-----------------------------------------------------------------
+
+> use tatiana
+switched to db tatiana
+
+-----------------------------------------------------------------
+1. Mostrar todos os documentos da collection produto do banco de dados seu nome
+-----------------------------------------------------------------
+
+tatiana> db.produto.find()
+[
+  { _id: 1, nome: 'cpu i7', qtd: 15 },
+  {
+    _id: 2,
+    nome: 'memoria ram',
+    qtd: 10,
+    descricao: { armazenamento: '8GB', tipo: 'DDR4' }
+  },
+  {
+    _id: 3,
+    nome: 'mouse',
+    qtd: 30,
+    descricao: {
+      conexao: 'USB 3.0',
+      armazenamento: '500GB',
+      sistema: [ 'Windows 10', 'Linux' ]
+    },
+    data_modificao: ISODate("2022-09-29T12:27:03.585Z"),
+    ts_modificado: Timestamp({ t: 1664456161, i: 1 })
+  },
+  {
+    _id: 4,
+    nome: 'hd externo',
+    qtd: 20,
+    descricao: {
+      conexao: 'USB 3.0',
+      amazenamento: '500GB',
+      sistema: [ 'Windows 10', 'Windows 8', 'Windows 7', 'Linux', 'Linux' ]
+    },
+    data_modificao: ISODate("2022-09-29T12:27:03.585Z")
+  }
+]
+
+-----------------------------------------------------------------
+2. Criar o index “query_produto” para pesquisar o campo nome do produto em ordem alfabética
+-----------------------------------------------------------------
+
+> db.produto.createIndex({nome:1},{name:'query_produto'})
+query_produto
+
+
+-----------------------------------------------------------------
+3. Pesquisar todos os índices da collection produto
+-----------------------------------------------------------------
+
+> db.produto.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { nome: 1 }, name: 'query_produto' }
+]
+>
+
+-----------------------------------------------------------------
+4. Pesquisar todos os documentos da collection produto
+-----------------------------------------------------------------
+
+> db.produto.find()
+[
+  { _id: 1, nome: 'cpu i7', qtd: 15 },
+  {
+    _id: 2,
+    nome: 'memoria ram',
+    qtd: 10,
+    descricao: { armazenamento: '8GB', tipo: 'DDR4' }
+  },
+  {
+    _id: 3,
+    nome: 'mouse',
+    qtd: 30,
+    descricao: {
+      conexao: 'USB 3.0',
+      armazenamento: '500GB',
+      sistema: [ 'Windows 10', 'Linux' ]
+    },
+    data_modificao: ISODate("2022-09-29T12:27:03.585Z"),
+    ts_modificado: Timestamp({ t: 1664456161, i: 1 })
+  },
+  {
+    _id: 4,
+    nome: 'hd externo',
+    qtd: 20,
+    descricao: {
+      conexao: 'USB 3.0',
+      amazenamento: '500GB',
+      sistema: [ 'Windows 10', 'Windows 8', 'Windows 7', 'Linux', 'Linux' ]
+    },
+    data_modificao: ISODate("2022-09-29T12:27:03.585Z")
+  }
+]
+
+-----------------------------------------------------------------
+5. Visualizar o plano de execução do exercício 4
+-----------------------------------------------------------------
+
+> db.produto.find().explain()
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'tatiana.produto',
+    indexFilterSet: false,
+    parsedQuery: {},
+    queryHash: '17830885',
+    planCacheKey: '17830885',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: { stage: 'COLLSCAN', direction: 'forward' },
+    rejectedPlans: []
+  },
+  command: { find: 'produto', filter: {}, '$db': 'tatiana' },
+  serverInfo: {
+    host: '142fcab4a4b3',
+    port: 27017,
+    version: '6.0.1',
+    gitVersion: '32f0f9c88dc44a2c8073a5bd47cf779d4bfdee6b'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  ok: 1
+}
+
+-----------------------------------------------------------------
+6. Pesquisar todos os documentos da collection produto, com uso da index “query_produto”
+-----------------------------------------------------------------
+
+> db.produto.find().hint({nome: 1}).explain()
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'tatiana.produto',
+    indexFilterSet: false,
+    parsedQuery: {},
+    queryHash: '17830885',
+    planCacheKey: '17830885',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: {
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { nome: 1 },
+        indexName: 'query_produto',
+        isMultiKey: false,
+        multiKeyPaths: { nome: [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { nome: [ '[MinKey, MaxKey]' ] }
+      }
+    },
+    rejectedPlans: []
+  },
+  command: { find: 'produto', filter: {}, hint: { nome: 1 }, '$db': 'tatiana' },
+  serverInfo: {
+    host: '142fcab4a4b3',
+    port: 27017,
+    version: '6.0.1',
+    gitVersion: '32f0f9c88dc44a2c8073a5bd47cf779d4bfdee6b'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  ok: 1
+}
+
+-----------------------------------------------------------------
+7. Visualizar o plano de execução do exercício 7
+-----------------------------------------------------------------
+
+> db.produto.find().hint({nome: 1}).explain()
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'tatiana.produto',
+    indexFilterSet: false,
+    parsedQuery: {},
+    queryHash: '17830885',
+    planCacheKey: '17830885',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: {
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { nome: 1 },
+        indexName: 'query_produto',
+        isMultiKey: false,
+        multiKeyPaths: { nome: [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { nome: [ '[MinKey, MaxKey]' ] }
+      }
+    },
+    rejectedPlans: []
+  },
+  command: { find: 'produto', filter: {}, hint: { nome: 1 }, '$db': 'tatiana' },
+  serverInfo: {
+    host: '142fcab4a4b3',
+    port: 27017,
+    version: '6.0.1',
+    gitVersion: '32f0f9c88dc44a2c8073a5bd47cf779d4bfdee6b'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  ok: 1
+}
+
+-----------------------------------------------------------------
+8. Remover o index “query_produto”
+-----------------------------------------------------------------
+
+> db.produto.dropIndex({nome: 1})
+{ "nIndexesWas" : 2, "ok" : 1 }
+
+-----------------------------------------------------------------
+9. Pesquisar todos os índices da collection produto
+-----------------------------------------------------------------
+
+> db.produto.getIndexes()
+[ { "v" : 2, "key" : { "_id" : 1 }, "name" : "_id_" } ]
