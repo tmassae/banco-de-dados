@@ -2,5 +2,6 @@ nosql/mongoDB/material-aulas/
 nosql/mongoDB/docker-compose.yml
 nosql/mongoDB/docker-compose-completo.yml
 nosql/mongoDB/data/
-nosql/redis/
+nosql/redis/material-aulas/
+nosql/redis/docker-compose.yml
 nosql/kafka/
