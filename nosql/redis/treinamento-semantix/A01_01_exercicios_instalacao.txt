@@ -1,0 +1,52 @@
+
+Exercícios - Instalação docker e docker-compose
+
+-----------------------------------------------------------------
+1. Instalação do docker e docker-compose
+-----------------------------------------------------------------
+
+Acesso: https://docs.docker.com/get-docker/
+
+-----------------------------------------------------------------
+2. Baixar as imagens do Redis
+-----------------------------------------------------------------
+
+docker pull redis
+
+-----------------------------------------------------------------
+3. Iniciar o Redis através do docker-compose
+-----------------------------------------------------------------
+
+docker-compose up -d --> utilizado no primeiro acesso
+                         ele irá processar o conteúdo do arquivo 
+                         de composição e configurar os volumes, 
+                         redes e containers especificados. 
+docker-compose start --> iniciar os containers
+docker-compose stop  --> parar os serviços
+docker-compose down  --> "matar" os serviços
+
+-----------------------------------------------------------------
+4. Listar as imagens em execução
+-----------------------------------------------------------------
+
+C:\Users\tmass\OneDrive\Documents\GitHub\banco-de-dados\nosql\redis>docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS             PORTS                    NAMES
+4b91b96db7de   redis     "redis-server --appe…"   About an hour ago   Up About an hour   0.0.0.0:6379->6379/tcp   redis
+
+-----------------------------------------------------------------
+5. Verificar a versão do Redis
+-----------------------------------------------------------------
+
+C:\Users\tmass\OneDrive\Documents\GitHub\banco-de-dados\nosql\redis>docker exec -it redis bash
+root@4b91b96db7de:/data# redis-server --version
+Redis server v=7.0.5 sha=00000000:0 malloc=jemalloc-5.2.1 bits=64 build=ac80c2f17196e78
+root@4b91b96db7de:/data#
+
+-----------------------------------------------------------------
+6. Acessar o Redis CLI
+
+C:\Users\tmass\OneDrive\Documents\GitHub\banco-de-dados\nosql\redis>docker exec -it redis bash
+root@4b91b96db7de:/data# redis-cli
+127.0.0.1:6379>
+
+-----------------------------------------------------------------
