@@ -4,4 +4,5 @@ nosql/mongoDB/docker-compose-completo.yml
 nosql/mongoDB/data/
 nosql/redis/material-aulas/
 nosql/redis/docker-compose.yml
+nosql/redis/data/
 nosql/kafka/
