@@ -5,6 +5,3 @@ nosql/mongoDB/data/
 nosql/redis/material-aulas/
 nosql/redis/docker-compose.yml
 nosql/redis/data/
-nosql/kafka/material-aulas/
-nosql/kafka/docker-compose.yml
-nosql/kafka/data/
